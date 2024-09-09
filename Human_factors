@@ -1,74 +1,160 @@
+login page//
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-.group-list {
-    display: flex;
-    flex-direction: column; 
-    gap: 20px; 
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness App - Login</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f3f4f7, #e8ebf3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
 
-.group {
-    border: 1px solid #ccc;
-    padding: 15px;
-    border-radius: 5px;
-}
+        .login-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
 
-.student-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 10px; 
-}
-</style>
+        .login-container h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 30px;
+        }
+
+        .role-selector {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+
+        .role-selector button {
+            padding: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 23%;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+
+        .role-selector button.active {
+            background-color: #3498db;
+        }
+
+        .role-selector button:hover {
+            background-color: #2ecc71;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 15px;
+            margin: 12px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background-color: #fafafa;
+            color: #333;
+            transition: border 0.3s;
+        }
+
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+
+        .login-container button[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <script>
+        let selectedRole = 'patient'; 
+
+        function selectRole(role) {
+            selectedRole = role; 
+            const buttons = document.querySelectorAll('.role-selector button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            document.getElementById(role).classList.add('active');
+        }
+
+        function login(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Validate based on role and ID prefix
+            if (selectedRole === 'patient' && username.startsWith('P') && password) {
+                window.location.href = 'patient-dashboard.html'; // Redirect to Patient Dashboard
+            } else if (selectedRole === 'therapist' && username.startsWith('T') && password) {
+                window.location.href = 'therapist-dashboard.html'; // Redirect to Therapist Dashboard
+            } else if (selectedRole === 'admin' && username.startsWith('A') && password) {
+                alert('Admin Access (not yet implemented).'); // Admin Access Placeholder
+            } else if (selectedRole === 'staff' && username.startsWith('S') && password) {
+                alert('Staff Access (not yet implemented).'); // Staff Access Placeholder
+            } else {
+                alert('Invalid credentials or incorrect role selected.');
+            }
+        }
+    </script>
 </head>
 <body>
 
-<div class="group-list">
-    <div class="group">
-        <h3>physical Rehabilitation</h3>
-        <p></p>
-        <button class="view-group">View Group</button> 
-      
-        <ul class="student-list"> 
-            <li>Mahesh</li>
-            <li>John Doe</li>
-            <li>Emily</li>
-            <li>jane Smithz</li>
-        </ul>
+    <div class="login-container">
+        <h2>Welcome to Wellness App</h2>
+
+        <div class="role-selector">
+            <button id="patient" onclick="selectRole('patient')" class="active">Patient</button>
+            <button id="therapist" onclick="selectRole('therapist')">Therapist</button>
+            <button id="admin" onclick="selectRole('admin')">Admin</button>
+            <button id="staff" onclick="selectRole('staff')">Staff</button>
+        </div>
+
+        <form onsubmit="login(event)">
+            <input type="text" id="username" placeholder="Enter your ID" required>
+            <input type="password" id="password" placeholder="Enter your password" required>
+            <button type="submit">Login</button>
+        </form>
     </div>
-
-    <div class="group">
-        <h3>pediatric care Group</h3>
-        <p></p>
-        <button class="view-group">View Group</button> 
-       
-    </div>
-    <div class="group">
-        <h3>Behavioral Therapy Group</h3>
-        <p></p>
-        <button class="view-group">View Group</button> 
-        
-    </div>
-
-    
-
-<script>
-const viewGroupButtons = document.querySelectorAll('.view-group');
-const editGroupButtons = document.querySelectorAll('.edit-group');
-
-
-// Add event listeners to buttons (You'll need to fill in the actual functionality)
-
-// Example for 'View Group':
-viewGroupButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const group = button.closest('.group'); 
-        const studentList = group.querySelector('.student-list');
-        studentList.style.display = (studentList.style.display === 'block') ? 'none' : 'block'; 
-    });
-});
-
-</script>
 
 </body>
 </html>
