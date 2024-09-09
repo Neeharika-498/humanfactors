@@ -7,7 +7,7 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f8ff; /* Light Blue */
+            background-color: #f0f8ff;
             margin: 0;
             padding: 0;
         }
@@ -31,7 +31,7 @@
             width: 100px;
             height: 100px;
             margin-right: 20px;
-            border: GREEN; /* Orange */
+            border: GREEN; 
         }
         .profile h2 {
             font-size: 28px;
@@ -45,7 +45,7 @@
             text-align: center;
             font-size: 18px;
             font-style: italic;
-            color:GREEN; /* Red-Orange */
+            color:GREEN;
             margin: 10px 0;
         }
         .dashboard {
@@ -71,7 +71,7 @@
         .widget h3 {
             font-size: 22px;
             margin-bottom: 15px;
-            color: indigo; /* Green */
+            color: indigo; 
         }
         .widget p {
             font-size: 16px;
@@ -84,12 +84,12 @@
             border: 1px solid #ddd;
             width: 100%;
             cursor: pointer;
-            background-color: #e3f2fd; /* Light Blue Background */
+            background-color: #e3f2fd;
         }
         footer {
             text-align: center;
             padding: 10px;
-            background-color: SKYBLUE; /* Blue */
+            background-color: SKYBLUE;
             color: #fff;
             margin-top: 30px;
             border-top-left-radius: 50px;
