@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tracker</title>
+    <title>Medication Tracker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -31,12 +32,12 @@
         .container h2 {
             color: #333;
         }
-        .container label, .container input {
+        .container label, .container input, .container textarea {
             display: block;
             width: 100%;
             margin: 10px 0;
         }
-        .container input {
+        .container input, .container textarea {
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ddd;
@@ -59,6 +60,23 @@
         }
         .submit-box button:hover {
             background-color: #0056b3; /* Darker Blue */
+        }
+        .calendar-container, .time-container {
+            margin-top: 20px;
+        }
+        .calendar-container input {
+            margin-top: 10px;
+        }
+        .frequency-container {
+            margin-top: 20px;
+        }
+        .frequency-container label, .frequency-container input {
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+        }
+        .frequency-container input {
+            width: 60px;
         }
         .modal {
             display: none;
@@ -103,22 +121,37 @@
 <body>
 
     <header>
-        <h1>Daily Tracker</h1>
+        <h1>Medication Tracker</h1>
     </header>
 
     <div class="container">
-        <h2>Track Your Daily Metrics</h2>
-        <label for="trackerType">Metric Type:</label>
-        <input type="text" id="trackerType" placeholder="e.g., Food, Sleep, Exercise">
+        <h2>Track Your Medication</h2>
+        
+        <label for="medicationDate">Select Date:</label>
+        <input type="text" id="medicationDate" placeholder="Select a date">
 
-        <label for="trackerValue">Value:</label>
-        <input type="text" id="trackerValue" placeholder="e.g., 2000 calories">
+        <label for="medicationName">Medication Name:</label>
+        <input type="text" id="medicationName" placeholder="e.g., Tramadol">
 
-        <label for="trackerDescription">Description:</label>
-        <textarea id="trackerDescription" rows="6" placeholder="Describe the metric..."></textarea>
+        <label for="medicationDose">Dose:</label>
+        <input type="text" id="medicationDose" placeholder="e.g., 50 mg">
 
-        <label for="trackerFile">Upload Image or Document (Optional):</label>
-        <input type="file" id="trackerFile" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf">
+        <label for="medicationFrequency">Frequency:</label>
+        <div class="frequency-container">
+            <input type="number" id="frequencyHours" placeholder="Hours" min="0">
+            <input type="number" id="frequencyMinutes" placeholder="Minutes" min="0">
+        </div>
+
+        <div class="calendar-container">
+            <label for="frequencyDate">Duration:</label>
+            <input type="text" id="frequencyDate" placeholder="Number of Days">
+        </div>
+
+        <label for="medicationDescription">Notes:</label>
+        <textarea id="medicationDescription" rows="4" placeholder="Additional notes..."></textarea>
+
+        <label for="medicationFile">Upload Image or Document (Optional):</label>
+        <input type="file" id="medicationFile" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf">
 
         <div class="submit-box">
             <button id="submitBtn">Submit</button>
@@ -137,17 +170,28 @@
     <!-- Success Modal -->
     <div id="successModal" class="modal">
         <div class="modal-content">
-            <h3>Metric submitted successfully!</h3>
+            <h3>Medication submitted successfully!</h3>
             <button onclick="closeSuccessModal()" class="btn-submit">Close</button>
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
     <script>
         const submitBtn = document.getElementById('submitBtn');
         const confirmationModal = document.getElementById('confirmationModal');
         const successModal = document.getElementById('successModal');
         const confirmSubmit = document.getElementById('confirmSubmit');
         const editEntry = document.getElementById('editEntry');
+
+        // Initialize the date picker for medication date
+        flatpickr("#medicationDate", {
+            dateFormat: "Y-m-d"
+        });
+
+        // Initialize the date picker for frequency start date
+        flatpickr("#frequencyDate", {
+            dateFormat: "Y-m-d"
+        });
 
         submitBtn.onclick = function() {
             confirmationModal.style.display = 'block';
