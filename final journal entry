@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journal Entry</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color: #333;
+        }
+        .container label, .container input, .container textarea {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+        }
+        .container input, .container textarea {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .submit-box {
+            background-color: #e3f2fd;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .submit-box button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .submit-box button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #ffffff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 300px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .modal-content h3 {
+            color: #333;
+        }
+        .modal-content button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-submit {
+            background-color: #4caf50;
+            color: #fff;
+        }
+        .btn-edit {
+            background-color: #ff5722;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Journal Entry</h1>
+    </header>
+
+    <div class="container">
+        <h2>Write Your Journal Entry</h2>
+        <label for="entryDate">Date:</label>
+        <input type="date" id="entryDate">
+        
+        <label for="entryTime">Time:</label>
+        <input type="time" id="entryTime">
+        
+        <label for="stateOfMind">State of Mind:</label>
+        <input type="text" id="stateOfMind" placeholder="e.g., Happy, Anxious">
+        
+        <label for="description">Description:</label>
+        <textarea id="description" rows="6" placeholder="Describe your day..."></textarea>
+
+        <label for="journalFile">Upload Image or Document:</label>
+        <input type="file" id="journalFile" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf">
+
+        <div class="submit-box">
+            <button id="submitBtn">Submit</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure you want to submit?</h3>
+            <button id="confirmSubmit" class="btn-submit">Yes, Submit</button>
+            <button id="editEntry" class="btn-edit">No, Go Back</button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <h3>Journal entry submitted successfully!</h3>
+            <button onclick="closeSuccessModal()" class="btn-submit">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const submitBtn = document.getElementById('submitBtn');
+        const confirmationModal = document.getElementById('confirmationModal');
+        const successModal = document.getElementById('successModal');
+        const confirmSubmit = document.getElementById('confirmSubmit');
+        const editEntry = document.getElementById('editEntry');
+
+        // Show confirmation modal when submit is clicked
+        submitBtn.onclick = function() {
+            confirmationModal.style.display = 'block';
+        }
+
+        // On confirming submission
+        confirmSubmit.onclick = function() {
+            confirmationModal.style.display = 'none';
+            successModal.style.display = 'block';
+        }
+
+        // Go back to editing the entry
+        editEntry.onclick = function() {
+            confirmationModal.style.display = 'none';
+        }
+
+        // Close success modal
+        function closeSuccessModal() {
+            successModal.style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target == confirmationModal) {
+                confirmationModal.style.display = 'none';
+            }
+            if (event.target == successModal) {
+                successModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
