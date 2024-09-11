@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapist - Your Patients</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+
+    .header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .patients-container, .followup-container {
+      background-color: white;
+      padding: 15px;
+      border-radius: 10px;
+      margin: 20px 0;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .patient {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .file-upload {
+      margin-top: 10px;
+    }
+
+    .followup-section {
+      margin: 20px 0;
+    }
+
+    .followup {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Your Patients</h1>
+  </div>
+
+  <div class="patients-container">
+    <h2>Patient List</h2>
+    <div class="patient">
+      <span>John Doe</span>
+      <button onclick="showPatientDetails('John Doe')">View Details</button>
+      <label><input type="checkbox" onclick="markForFollowup('John Doe')"> Mark for Follow-Up</label>
+      <input type="file" class="file-upload" id="uploadJohn" />
+    </div>
+    <div class="patient">
+      <span>Emily Davis</span>
+      <button onclick="showPatientDetails('Emily Davis')">View Details</button>
+      <label><input type="checkbox" onclick="markForFollowup('Emily Davis')"> Mark for Follow-Up</label>
+      <input type="file" class="file-upload" id="uploadEmily" />
+    </div>
+  </div>
+
+  <div class="followup-container">
+    <h2>Follow-Up Patients</h2>
+    <ul id="followupList"></ul>
+  </div>
+
+  <script>
+    function markForFollowup(patientName) {
+      const followupList = document.getElementById('followupList');
+      const listItem = document.createElement('li');
+      listItem.textContent = patientName + ' - Follow Up';
+      listItem.className = 'followup';
+      followupList.appendChild(listItem);
+    }
+
+    function showPatientDetails(patientName) {
+      alert("Displaying details for " + patientName);
+      // Here you can redirect to a dedicated patient dashboard page
+      window.location.href = 'patient-dashboard.html?patient=' + patientName;
+    }
+  </script>
+
+</body>
+</html>
