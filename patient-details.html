@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        .main-content {
+            margin-top: 20px;
+        }
+        .details-section, .notes-section {
+            background: #fff;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .notes-section textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .notes-section button {
+            margin-top: 10px;
+            padding: 10px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .notes-section button:hover {
+            background: #0056b3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 30%;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .modal-content h3 {
+            margin: 0;
+            padding-bottom: 10px;
+        }
+        .modal-buttons {
+            margin-top: 15px;
+        }
+        .modal-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .submit-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        .cancel-button {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Patient Details</h1>
+    </header>
+    <div class="container">
+        <div class="main-content">
+            <div class="details-section" id="patient-details">
+                <h2>Demographic Details</h2>
+                <p><strong>Name:</strong> <span id="name"></span></p>
+                <p><strong>Age:</strong> <span id="age"></span></p>
+                <p><strong>Gender:</strong> <span id="gender"></span></p>
+                <p><strong>State of Mind:</strong> <span id="state-of-mind"></span></p>
+            </div>
+            <div class="notes-section">
+                <h2>Notes</h2>
+                <textarea id="notes" placeholder="Add notes here..."></textarea>
+                <button id="save-button">Save Note</button>
+            </div>
+            <a href="patients.html">Back to Patients List</a>
+        </div>
+    </div>
+
+    <!-- Modal structure -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure you want to submit?</h3>
+            <div class="modal-buttons">
+                <button id="submit-button" class="submit-button">Submit</button>
+                <button id="cancel-button" class="cancel-button">Continue Editing</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getQueryParams() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return {
+                id: urlParams.get('id')
+            };
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = getQueryParams();
+            const patientId = params.id;
+
+            // Patient data
+            const patients = {
+                1: {
+                    name: 'Wendy Osborne',
+                    age: '60',
+                    gender: 'Male',
+                    stateOfMind: 'I am capable and strong'
+                },
+                2: {
+                    name: 'Grace Maynard',
+                    age: '35',
+                    gender: 'Female',
+                    stateOfMind: 'I am worthy of happiness'
+                },
+                3: {
+                    name: 'John Cooper',
+                    age: '40',
+                    gender: 'Non-Binary',
+                    stateOfMind: 'I trust in myself and abilities'
+                }
+            };
+
+            // Populate patient details
+            const patient = patients[patientId];
+            if (patient) {
+                document.getElementById('name').textContent = patient.name;
+                document.getElementById('age').textContent = patient.age;
+                document.getElementById('gender').textContent = patient.gender;
+                document.getElementById('state-of-mind').textContent = patient.stateOfMind;
+            } else {
+                document.getElementById('patient-details').innerHTML = '<p>Patient not found.</p>';
+            }
+
+            // Get modal elements
+            const modal = document.getElementById('myModal');
+            const saveButton = document.getElementById('save-button');
+            const submitButton = document.getElementById('submit-button');
+            const cancelButton = document.getElementById('cancel-button');
+
+            // Show the modal when save button is clicked
+            saveButton.addEventListener('click', function() {
+                modal.style.display = 'block';
+            });
+
+            // Close the modal and save notes when submit button is clicked
+            submitButton.addEventListener('click', function() {
+                const notes = document.getElementById('notes').value;
+                alert('Notes saved successfully!');  // Here you could implement the actual saving logic
+                modal.style.display = 'none';
+            });
+
+            // Close the modal without saving when cancel button is clicked
+            cancelButton.addEventListener('click', function() {
+                modal.style.display = 'none';
+            });
+
+            // Close the modal if the user clicks outside of the modal
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
