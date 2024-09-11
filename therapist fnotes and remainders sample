@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Therapist Notes & Reminders</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .search-container input {
+      padding: 5px;
+      font-size: 16px;
+    }
+
+    .bell-icon {
+      position: relative;
+      cursor: pointer;
+      font-size: 24px;
+    }
+
+    .reminder-count {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      padding: 5px;
+    }
+
+    .patients-container {
+      padding: 20px;
+    }
+
+    .patient {
+      list-style-type: none;
+      margin: 10px 0;
+      display: flex;
+      justify-content: space-between;
+      background-color: white;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .note-icon {
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #reminders {
+      background-color: white;
+      padding: 15px;
+      margin: 15px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Therapist Dashboard</h1>
+    <div class="search-container">
+      <input type="text" id="searchPatient" placeholder="Search Patient..." onkeyup="searchPatient()">
+    </div>
+    <div class="bell-icon" onclick="showReminders()">
+      &#128276; <!-- Unicode for Bell Icon -->
+      <span class="reminder-count">3</span>
+    </div>
+  </div>
+
+  <div id="reminders" class="reminders hidden">
+    <h2>Reminders</h2>
+    <ul>
+      <li>Reminder 1: Session with John at 2 PM</li>
+      <li>Reminder 2: Review notes for Emily</li>
+      <li>Reminder 3: Prepare session for Michael</li>
+    </ul>
+  </div>
+
+  <div class="patients-container">
+    <h2>Patient List</h2>
+    <ul id="patientList">
+      <li class="patient">
+        <span>John Doe</span>
+        <span class="note-icon" onclick="writeNote('John Doe')">&#9998;</span> <!-- Unicode for Pencil Icon -->
+      </li>
+      <li class="patient">
+        <span>Emily Davis</span>
+        <span class="note-icon" onclick="writeNote('Emily Davis')">&#9998;</span>
+      </li>
+      <li class="patient">
+        <span>Michael Smith</span>
+        <span class="note-icon" onclick="writeNote('Michael Smith')">&#9998;</span>
+      </li>
+    </ul>
+  </div>
+
+  <div id="noteModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span> <!-- Unicode for Close Icon -->
+      <h2>Write Notes for <span id="patientName"></span></h2>
+      <textarea id="noteText" rows="10" cols="50" placeholder="Enter notes here..."></textarea>
+      <br>
+      <button onclick="saveNote()">Save</button>
+    </div>
+  </div>
+
+  <script>
+    function searchPatient() {
+      let input = document.getElementById('searchPatient').value.toLowerCase();
+      let patients = document.querySelectorAll('.patient');
+
+      patients.forEach(patient => {
+        let patientName = patient.querySelector('span').textContent.toLowerCase();
+        if (patientName.includes(input)) {
+          patient.style.display = '';
+        } else {
+          patient.style.display = 'none';
+        }
+      });
+    }
+
+    function writeNote(patientName) {
+      document.getElementById('noteModal').style.display = 'flex';
+      document.getElementById('patientName').textContent = patientName;
+    }
+
+    function closeModal() {
+      document.getElementById('noteModal').style.display = 'none';
+    }
+
+    function saveNote() {
+      let note = document.getElementById('noteText').value;
+      alert('Note saved: ' + note);
+      closeModal();
+    }
+
+    function showReminders() {
+      let reminderSection = document.getElementById('reminders');
+      if (reminderSection.classList.contains('hidden')) {
+        reminderSection.classList.remove('hidden');
+      } else {
+        reminderSection.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
