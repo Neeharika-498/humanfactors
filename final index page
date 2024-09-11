@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: skyblue;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+        }
+        .profile h2 {
+            font-size: 28px;
+            margin: 0;
+            color: #333;
+        }
+        .emoji {
+            font-size: 35px;
+        }
+        .caption {
+            text-align: center;
+            font-size: 18px;
+            font-style: italic;
+            color: green;
+            margin: 10px 0;
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .widget {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .widget h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: indigo;
+        }
+        .widget p {
+            font-size: 16px;
+            color: #333;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: skyblue;
+            color: #fff;
+            margin-top: 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+        .widget a {
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Patient Dashboard</h1>
+    </header>
+
+    <div class="profile">
+        
+        <h2> Welcome<span class="emoji">😊</span></h2>
+    </div>
+
+    <div class="caption">"Live, Love, Laugh"</div>
+
+    <div class="dashboard">
+        <div class="widget">
+            <h3>Journal Entry</h3>
+            <p>Write about your day and upload files herse.</p>
+            <a href="journal_entry.html">Go to Journal Entry</a>
+        </div>
+
+        <div class="widget">
+            <h3>Affirmations</h3>
+            <p>Select and track daily affirmations.</p>
+            <a href="affirmations.html">Go to Affirmations</a>
+        </div>
+
+        <div class="widget">
+            <h3>Activity Tracker</h3>
+            <p>Track activities like sleep, meals, and exercise.</p>
+            <a href="tracker.html">Go to Activity Tracker</a>
+        </div>
+
+        <div class="widget">
+            <h3>Past Records</h3>
+            <p>Review your past entries and affirmations.</p>
+            <a href="past_records.html">Go to Past Records</a>
+        </div>
+
+        <div class="widget">
+            <h3>Goals</h3>
+            <p>Set and track your personal goals.</p>
+            <a href="goals.html">Go to Goals</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Wellness App &copy; 2024 | Empowering your wellness journey.</p>
+    </footer>
+
+</body>
+</html>
