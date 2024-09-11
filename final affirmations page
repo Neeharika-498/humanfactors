@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affirmations</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color: #333;
+        }
+        .affirmation-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .affirmation-list li {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .affirmation-list input {
+            margin-right: 15px;
+        }
+        .selected-affirmation {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #c8e6c9;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            margin-top: 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Affirmations</h1>
+    </header>
+
+    <div class="container">
+        <h2>Select Your Affirmation for the Day:</h2>
+        <ul class="affirmation-list">
+            <li><input type="radio" name="affirmation" value="I am capable and strong."> I am capable and strong.</li>
+            <li><input type="radio" name="affirmation" value="I am worthy of happiness."> I am worthy of happiness.</li>
+            <li><input type="radio" name="affirmation" value="I trust in myself and my abilities."> I trust in myself and my abilities.</li>
+            <li><input type="radio" name="affirmation" value="I deserve love and kindness."> I deserve love and kindness.</li>
+        </ul>
+        <button onclick="selectAffirmation()">Submit</button>
+
+        <div class="selected-affirmation" id="affirmationOfDay"></div>
+    </div>
+
+    <footer>
+        <p>Wellness App &copy; 2024 | Empowering your wellness journey.</p>
+    </footer>
+
+    <script>
+        function selectAffirmation() {
+            const selected = document.querySelector('input[name="affirmation"]:checked');
+            if (selected) {
+                document.getElementById('affirmationOfDay').innerText = "Affirmation of the Day: " + selected.value;
+                // Store the selected affirmation in localStorage for tracking later
+                localStorage.setItem('selectedAffirmation', selected.value);
+            } else {
+                alert("Please select an affirmation.");
+            }
+        }
+
+        // Load the selected affirmation on page load if available
+        window.onload = function() {
+            const storedAffirmation = localStorage.getItem('selectedAffirmation');
+            if (storedAffirmation) {
+                document.getElementById('affirmationOfDay').innerText = "Affirmation of the Day: " + storedAffirmation;
+            }
+        }
+    </script>
+
+</body>
+</html>
