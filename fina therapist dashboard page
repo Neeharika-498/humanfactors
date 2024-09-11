@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapist Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff; /* Light Blue */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff; /* Blue */
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px auto;
+            width: 90%;
+            max-width: 1200px;
+        }
+        .widget {
+            background-color: #ffffff;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .widget:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        .widget h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .widget p {
+            font-size: 16px;
+            color: #555;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff; /* Blue */
+            color: white;
+            margin-top: 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Therapist Dashboard</h1>
+    </header>
+
+    <div class="dashboard">
+        <!-- Your Patients -->
+        <div class="widget">
+            <h3><a href="your-patients.html">Your Patients</a></h3>
+            <p>View and manage patient details.</p>
+        </div>
+
+        <!-- Manage Groups -->
+        <div class="widget">
+            <h3><a href="manage-groups.html">Manage Groups</a></h3>
+            <p>Create and edit patient groups.</p>
+        </div>
+
+        <!-- Notes and Reminders -->
+        <div class="widget">
+            <h3><a href="notes-reminders.html">Notes & Reminders</a></h3>
+            <p>Keep track of important notes and reminders.</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Therapist App &copy; 2024 | Helping you manage patients with ease.</p>
+    </footer>
+
+</body>
+</html>
