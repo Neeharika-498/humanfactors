@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goals</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color: #333;
+        }
+        .goal-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .goal-list li {
+            background-color: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+        .goal-list input {
+            margin-right: 15px;
+        }
+        .goal-list button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .goal-list button:hover {
+            background-color: #0056b3;
+        }
+        .selected-goals {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #c8e6c9;
+            border-radius: 10px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            margin-top: 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Goals</h1>
+    </header>
+
+    <div class="container">
+        <h2>Set Your Goals for the Day:</h2>
+        <ul class="goal-list">
+            <li><input type="checkbox" id="goalSleep" value="Sleep 8 hours"> Sleep 8 hours</li>
+            <li><input type="checkbox" id="goalExercise" value="Exercise for 30 minutes"> Exercise for 30 minutes</li>
+            <li><input type="checkbox" id="goalWater" value="Drink 8 glasses of water"> Drink 8 glasses of water</li>
+        </ul>
+        <button onclick="setGoals()">Submit Goals</button>
+
+        <div class="selected-goals" id="goalOfDay"></div>
+    </div>
+
+    <footer>
+        <p>Wellness App &copy; 2024 | Empowering your wellness journey.</p>
+    </footer>
+
+    <script>
+        function setGoals() {
+            let goals = [];
+            if (document.getElementById('goalSleep').checked) {
+                goals.push(document.getElementById('goalSleep').value);
+            }
+            if (document.getElementById('goalExercise').checked) {
+                goals.push(document.getElementById('goalExercise').value);
+            }
+            if (document.getElementById('goalWater').checked) {
+                goals.push(document.getElementById('goalWater').value);
+            }
+
+            if (goals.length > 0) {
+                document.getElementById('goalOfDay').innerText = "Goals of the Day: " + goals.join(', ');
+                // Store the goals in localStorage for later tracking
+                localStorage.setItem('selectedGoals', JSON.stringify(goals));
+            } else {
+                alert("Please select at least one goal.");
+            }
+        }
+
+        // Load the selected goals on page load if available
+        window.onload = function() {
+            const storedGoals = localStorage.getItem('selectedGoals');
+            if (storedGoals) {
+                document.getElementById('goalOfDay').innerText = "Goals of the Day: " + JSON.parse(storedGoals).join(', ');
+            }
+        }
+    </script>
+
+</body>
+</html>
