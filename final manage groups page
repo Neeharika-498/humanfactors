@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Groups</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .header {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      text-align: center;
+    }
+
+    .group-container {
+      padding: 20px;
+    }
+
+    .group-item {
+      list-style-type: none;
+      margin: 10px 0;
+      background-color: white;
+      padding: 15px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+    }
+
+    .group-item:hover {
+      background-color: #f0f0f0;
+    }
+
+    .group-details {
+      display: none;
+      padding: 20px;
+      background-color: white;
+      margin-top: 10px;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Manage Groups</h1>
+  </div>
+
+  <div class="group-container">
+    <ul id="groupList">
+      <li class="group-item" onclick="showGroupDetails('Group Autism')">
+        Group 1 (John, Emily)
+      </li>
+      <li class="group-item" onclick="showGroupDetails('Group Physical therapy')">
+        Group 2 (Michael, Sarah)
+      </li>
+    </ul>
+
+    <button onclick="createGroup()">Create New Group</button>
+  </div>
+
+  <div id="groupDetails" class="group-details"></div>
+
+  <script>
+    function showGroupDetails(groupName) {
+      const groupDetails = document.getElementById('groupDetails');
+      groupDetails.innerHTML = `<h2>${groupName} Details</h2>
+                                <p><strong>Members:</strong> John, Emily</p>
+                                <button onclick="editGroup('${groupName}')">Edit Group</button>`;
+      groupDetails.style.display = 'block';
+    }
+
+    function createGroup() {
+      alert('Feature to create a new group coming soon.');
+    }
+
+    function editGroup(groupName) {
+      alert(`Editing ${groupName}`);
+    }
+  </script>
+</body>
+</html>
