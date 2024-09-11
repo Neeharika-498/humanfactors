@@ -1,89 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Manage Groups</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Groups</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0; 
+        }
 
-    .header {
-      padding: 10px;
-      background-color: #4CAF50;
-      color: white;
-      text-align: center;
-    }
+        header {
+            background-color: #3498db; 
+            color: white;
+            padding: 1em 0;
+            text-align: center; 
+        }
 
-    .group-container {
-      padding: 20px;
-    }
+        .therapist-info {
+            font-style: italic;
+            margin-top: 10px; 
+        }
 
-    .group-item {
-      list-style-type: none;
-      margin: 10px 0;
-      background-color: white;
-      padding: 15px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-    }
+        .group-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
 
-    .group-item:hover {
-      background-color: #f0f0f0;
-    }
+        .group-box {
+            background-color: #e0e0e0; 
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-    .group-details {
-      display: none;
-      padding: 20px;
-      background-color: white;
-      margin-top: 10px;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    }
+        .group-box h2 {
+            margin-top: 0;
+        }
 
-  </style>
+        .view-button, .edit-button {
+            background-color: #2980b9; 
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none; 
+            margin-right: 10px; 
+        }
+
+        .edit-button {
+            background-color: #f39c12; 
+        }
+
+        .patient-list {
+            list-style: none; 
+            padding-left: 0;    
+            margin-top: 10px; 
+            display: none; 
+        }
+
+        .edit-options {
+            display: none; 
+            margin-top: 10px;
+        }
+
+        .edit-options button {
+            background-color: #f39c12; 
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        /* Make "GROUP:" and "Description:" bold */
+        .group-box strong {
+            font-weight: bold;
+        }
+
+        /* Add Total Patients styling if needed */
+        .total-patients {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-  <div class="header">
-    <h1>Manage Groups</h1>
-  </div>
 
-  <div class="group-container">
-    <ul id="groupList">
-      <li class="group-item" onclick="showGroupDetails('Group Autism')">
-        Group 1 (John, Emily)
-      </li>
-      <li class="group-item" onclick="showGroupDetails('Group Physical therapy')">
-        Group 2 (Michael, Sarah)
-      </li>
-    </ul>
+    <header>
+        <h1>Manage Groups</h1>
+        <div class="therapist-info">
+            <p>Therapist: Anushka</p>
+        </div>
+    </header>
 
-    <button onclick="createGroup()">Create New Group</button>
-  </div>
+    <div class="group-container">
 
-  <div id="groupDetails" class="group-details"></div>
+        <div class="group-box">
+            <h2>GROUP: Autism</h2>
+            <p><strong>Description:</strong> Focused on behavioural therapy</p>
+            <button class="view-button" onclick="togglePatients(this)">View Group</button>
+            <ul class="patient-list">
+                <li>Total Patients: 4</li>
+                <li>Mahesh</li>
+                <li>John Doe</li>
+                <li>Emily</li>
+                <li>Jane Smith</li>
+            </ul>
+            <button class="edit-button" onclick="toggleEditOptions(this)" style="display: none;">Edit Group</button> 
+            <div class="edit-options">
+                <button>Add Patient</button>
+                <button>Remove Patient</button>
+            </div>
+        </div>
 
-  <script>
-    function showGroupDetails(groupName) {
-      const groupDetails = document.getElementById('groupDetails');
-      groupDetails.innerHTML = `<h2>${groupName} Details</h2>
-                                <p><strong>Members:</strong> John, Emily</p>
-                                <button onclick="editGroup('${groupName}')">Edit Group</button>`;
-      groupDetails.style.display = 'block';
-    }
+        <div class="group-box">
+            <h2>GROUP: Social Skill</h2>
+            <p><strong>Description:</strong> Focused on empathy and appropriate behaviour</p>
+            <button class="view-button" onclick="togglePatients(this)">View Group</button>
+            <ul class="patient-list" style="display: none;"></ul>
+            <button class="edit-button" onclick="toggleEditOptions(this)" style="display: none;">Edit Group</button> 
+            <div class="edit-options">
+                <button>Add Patient</button>
+                <button>Remove Patient</button>
+            </div> 
+        </div>
 
-    function createGroup() {
-      alert('Feature to create a new group coming soon.');
-    }
+        <div class="group-box">
+            <h2>GROUP: Physical Therapy</h2>
+            <p><strong>Description:</strong> Focused on strengthening and coordination exercises</p>
+            <button class="view-button" onclick="togglePatients(this)">View Group</button>
+            <ul class="patient-list" style="display: none;"></ul>
+            <button class="edit-button" onclick="toggleEditOptions(this)" style="display: none;">Edit Group</button> 
+            <div class="edit-options">
+                <button>Add Patient</button>
+                <button>Remove Patient</button>
+            </div> 
+        </div>
 
-    function editGroup(groupName) {
-      alert(`Editing ${groupName}`);
-    }
-  </script>
+    </div>
+
+    <script>
+        function togglePatients(button) {
+            const patientList = button.nextElementSibling;
+            const editButton = patientList.nextElementSibling; 
+
+            if (patientList.style.display === "none") {
+                patientList.style.display = "block";
+                editButton.style.display = "block"; 
+                button.textContent = "Hide Group";
+            } else {
+                patientList.style.display = "none";
+                editButton.style.display = "none"; 
+                button.textContent = "View Group";
+
+                const editOptions = editButton.nextElementSibling;
+                editOptions.style.display = "none"; 
+            }
+        }
+
+        function toggleEditOptions(button) {
+            const editOptions = button.nextElementSibling; 
+            if (editOptions.style.display === "none") {
+                editOptions.style.display = "block";
+            } else {
+                editOptions.style.display = "none";
+            }
+        }
+    </script>
 </body>
 </html>
