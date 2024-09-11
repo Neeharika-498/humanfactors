@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Records</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+        }
+        .container h2 {
+            color: #333;
+        }
+        .record-section {
+            margin-bottom: 30px;
+        }
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            margin-top: 30px;
+            border-top-left-radius: 50px;
+            border-top-right-radius: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Past Records</h1>
+    </header>
+
+    <div class="container">
+        <h2>Your Previous Entries:</h2>
+
+        <div class="record-section">
+            <h3>Past Affirmations</h3>
+            <p id="pastAffirmation">Loading...</p>
+        </div>
+
+        <div class="record-section">
+            <h3>Past Goals</h3>
+            <p id="pastGoals">Loading...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Wellness App &copy; 2024 | Empowering your wellness journey.</p>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            // Load the past affirmation
+            const storedAffirmation = localStorage.getItem('selectedAffirmation');
+            if (storedAffirmation) {
+                document.getElementById('pastAffirmation').innerText = storedAffirmation;
+            } else {
+                document.getElementById('pastAffirmation').innerText = "No affirmation recorded yet.";
+            }
+
+            // Load the past goals
+            const storedGoals = localStorage.getItem('selectedGoals');
+            if (storedGoals) {
+                document.getElementById('pastGoals').innerText = JSON.parse(storedGoals).join(', ');
+            } else {
+                document.getElementById('pastGoals').innerText = "No goals recorded yet.";
+            }
+        }
+    </script>
+
+</body>
+</html>
