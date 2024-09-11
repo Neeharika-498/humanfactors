@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      padding: 20px;
+    }
+
+    .dashboard-header {
+      background-color: #3498db;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 10px;
+    }
+
+    .patient-info, .notes, .files {
+      background-color: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-header">
+    <h1>Patient Dashboard</h1>
+    <p>Details for <span id="patientName">John Doe</span></p>
+  </div>
+
+  <div class="patient-info">
+    <h2>Patient Information</h2>
+    <p>Age: 30</p>
+    <p>Last Appointment: 05 Sept 2024</p>
+  </div>
+
+  <div class="notes">
+    <h2>Notes</h2>
+    <textarea id="notesArea" rows="5" cols="50" placeholder="Add your notes here..."></textarea>
+    <button onclick="saveNotes()">Save Notes</button>
+  </div>
+
+  <div class="files">
+    <h2>Upload Files</h2>
+    <input type="file" id="fileUpload">
+    <button onclick="uploadFile()">Upload</button>
+  </div>
+
+  <script>
+    // Display the patient name from the query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const patientName = urlParams.get('patient');
+    document.getElementById('patientName').textContent = patientName;
+
+    function saveNotes() {
+      const notes = document.getElementById('notesArea').value;
+      alert('Notes saved: ' + notes);
+    }
+
+    function uploadFile() {
+      const fileInput = document.getElementById('fileUpload');
+      const file = fileInput.files[0];
+      if (file) {
+        alert('File uploaded: ' + file.name);
+      } else {
+        alert('No file selected.');
+      }
+    }
+  </script>
+
+</body>
+</html>
