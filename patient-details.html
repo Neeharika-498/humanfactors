@@ -32,6 +32,11 @@
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .details-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         .notes-section textarea {
             width: 100%;
             height: 100px;
@@ -52,8 +57,12 @@
         .notes-section button:hover {
             background: #0056b3;
         }
-
-        /* Modal styles */
+        .upload-section {
+            margin-top: 10px;
+        }
+        .upload-section input[type="file"] {
+            margin-top: 10px;
+        }
         .modal {
             display: none;
             position: fixed;
@@ -97,6 +106,14 @@
             border: none;
             border-radius: 5px;
         }
+        .flag-icon {
+            font-size: 20px;
+            cursor: pointer;
+            color: #ff4500;
+        }
+        .flag-icon:hover {
+            color: #ff0000;
+        }
     </style>
 </head>
 <body>
@@ -106,22 +123,29 @@
     <div class="container">
         <div class="main-content">
             <div class="details-section" id="patient-details">
-                <h2>Demographic Details</h2>
-                <p><strong>Name:</strong> <span id="name"></span></p>
-                <p><strong>Age:</strong> <span id="age"></span></p>
-                <p><strong>Gender:</strong> <span id="gender"></span></p>
-                <p><strong>State of Mind:</strong> <span id="state-of-mind"></span></p>
+                <div>
+                    <h2>Demographic Details</h2>
+                    <p><strong>Name:</strong> <span id="name"></span></p>
+                    <p><strong>Age:</strong> <span id="age"></span></p>
+                    <p><strong>Gender:</strong> <span id="gender"></span></p>
+                    <p><strong>State of Mind:</strong> <span id="state-of-mind"></span></p>
+                </div>
+                <div>
+                    <span class="flag-icon">⚑</span>
+                </div>
             </div>
             <div class="notes-section">
                 <h2>Notes</h2>
                 <textarea id="notes" placeholder="Add notes here..."></textarea>
                 <button id="save-button">Save Note</button>
             </div>
+            <div class="upload-section">
+                <h2>Upload Files</h2>
+                <input type="file" id="file-upload" />
+            </div>
             <a href="patients.html">Back to Patients List</a>
         </div>
     </div>
-
-    <!-- Modal structure -->
     <div id="myModal" class="modal">
         <div class="modal-content">
             <h3>Are you sure you want to submit?</h3>
@@ -131,7 +155,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function getQueryParams() {
             const urlParams = new URLSearchParams(window.location.search);
@@ -144,12 +167,11 @@
             const params = getQueryParams();
             const patientId = params.id;
 
-            // Patient data
             const patients = {
                 1: {
                     name: 'Wendy Osborne',
                     age: '60',
-                    gender: 'Male',
+                    gender: 'Female',
                     stateOfMind: 'I am capable and strong'
                 },
                 2: {
@@ -182,16 +204,15 @@
             const saveButton = document.getElementById('save-button');
             const submitButton = document.getElementById('submit-button');
             const cancelButton = document.getElementById('cancel-button');
-
+            
             // Show the modal when save button is clicked
             saveButton.addEventListener('click', function() {
                 modal.style.display = 'block';
             });
-
             // Close the modal and save notes when submit button is clicked
             submitButton.addEventListener('click', function() {
                 const notes = document.getElementById('notes').value;
-                alert('Notes saved successfully!');  // Here you could implement the actual saving logic
+                alert('Notes saved successfully!');
                 modal.style.display = 'none';
             });
 
