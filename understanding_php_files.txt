@@ -1,0 +1,33 @@
+db_connect.php: Handles the database connection.
+
+register.php: Manages user registration.
+
+login.php: Manages user login.
+
+logout.php: Logs out the user.
+
+dashboard.php: Displays the user dashboard (different for patients and therapists).
+
+add_journal.php: Allows patients to add new journal entries.
+
+view_journal.php: Allows users to view their past journal entries.
+
+edit_journal.php: Allows patients to edit journal entries.
+
+delete_journal.php: Handles the deletion of journal entries.
+
+view_patient.php: Displays patient details for therapists.
+
+add_patient_note.php: Allows therapists to add private notes.
+
+manage_groups.php: Allows therapists to manage patient groups.
+
+flag_patient.php: Allows therapists to flag patients for follow-up.
+
+view_flagged_patients.php: Displays a list of flagged patients.
+
+admin_dashboard.php: Displays non-sensitive patient data for administrative staff.
+
+auditor_dashboard.php: Displays aggregated data for auditors.
+
+unauthorized.php: Shows unauthorized access messages.
