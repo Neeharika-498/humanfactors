@@ -1,10 +1,10 @@
 <?php
 // db_connect.php
 
-$servername = "localhost";  // XAMPP default for localhost
-$username = "root";         // XAMPP default username
-$password = "";             // XAMPP default password (usually empty)
-$dbname = "care_db";        // Your database name
+$servername = "localhost";  // localhost
+$username = "root";         // default username
+$password = "";             // default password 
+$dbname = "care_d";        
 
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
